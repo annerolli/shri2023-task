@@ -1,13 +1,17 @@
 {
   "scripts": {
-    "react": "babel --presets @babel/preset-react script.js --out-file script.min.js",
-    "styles": "postcss ./styles.css --use postcss-csso --output ./styles.min.css",
-    "svg": "svgo -f ./assets"
+    "html": "html-minifier --remove-comments --collapse-whitespace --input-dir src --output-dir dist --file-ext html",
+    "js": "babel --presets=@babel/preset-react,minify ./src/script.js --out-file ./dist/script.js",
+    "styles": "postcss ./src/styles.css --use postcss-csso --no-map --output ./dist/styles.css",
+    "svg": "svgo -f ./src/assets -o ./dist/assets",
+    "build": "yarn html && yarn js && yarn styles && yarn svg"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.6",
     "@babel/core": "^7.22.8",
     "@babel/preset-react": "^7.22.5",
+    "babel-preset-minify": "^0.5.2",
+    "html-minifier": "^4.0.0",
     "postcss": "^8.4.24",
     "postcss-cli": "^10.1.0",
     "postcss-csso": "^6.0.1",
